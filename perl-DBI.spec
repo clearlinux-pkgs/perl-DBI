@@ -4,7 +4,7 @@
 #
 Name     : perl-DBI
 Version  : 1.634
-Release  : 8
+Release  : 9
 URL      : http://www.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-1.634.tar.gz
 Source0  : http://www.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-1.634.tar.gz
 Summary  : 'Database independent interface for Perl'
