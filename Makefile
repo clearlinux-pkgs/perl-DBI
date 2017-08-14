@@ -1,5 +1,5 @@
 PKG_NAME := perl-DBI
-URL := http://www.cpan.org/CPAN/authors/id/T/TI/TIMB/DBI-1.636.tar.gz
+URL := https://www.cpan.org/authors/id/T/TI/TIMB/DBI-1.636_91.tar.gz
 
 
 include ../common/Makefile.common
