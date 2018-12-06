@@ -4,7 +4,7 @@
 #
 Name     : perl-DBI
 Version  : 1.642
-Release  : 27
+Release  : 28
 URL      : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.642.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.642.tar.gz
 Summary  : 'Database independent interface for Perl'
