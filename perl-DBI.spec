@@ -4,10 +4,10 @@
 #
 Name     : perl-DBI
 Version  : 1.642
-Release  : 31
+Release  : 32
 URL      : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.642.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.642.tar.gz
-Summary  : 'Database independent interface for Perl'
+Summary  : Database independent interface for Perl
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-DBI-bin = %{version}-%{release}
@@ -24,7 +24,6 @@ BuildRequires : buildreq-cpan
 Summary: bin components for the perl-DBI package.
 Group: Binaries
 Requires: perl-DBI-license = %{version}-%{release}
-Requires: perl-DBI-man = %{version}-%{release}
 
 %description bin
 bin components for the perl-DBI package.
@@ -36,6 +35,7 @@ Group: Development
 Requires: perl-DBI-lib = %{version}-%{release}
 Requires: perl-DBI-bin = %{version}-%{release}
 Provides: perl-DBI-devel = %{version}-%{release}
+Requires: perl-DBI = %{version}-%{release}
 
 %description dev
 dev components for the perl-DBI package.
