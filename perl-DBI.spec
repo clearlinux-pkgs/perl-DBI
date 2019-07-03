@@ -4,16 +4,20 @@
 #
 Name     : perl-DBI
 Version  : 1.642
-Release  : 34
+Release  : 35
 URL      : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.642.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.642.tar.gz
-Summary  : Database independent interface for Perl
+Summary  : 'Database independent interface for Perl'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-DBI-bin = %{version}-%{release}
 Requires: perl-DBI-lib = %{version}-%{release}
 Requires: perl-DBI-license = %{version}-%{release}
 Requires: perl-DBI-man = %{version}-%{release}
+Requires: perl(Coro::Select)
+Requires: perl(Params::Validate)
+Requires: perl(RPC::PlClient)
+Requires: perl(RPC::PlServer)
 BuildRequires : buildreq-cpan
 
 %description
@@ -73,7 +77,7 @@ man components for the perl-DBI package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -83,7 +87,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
