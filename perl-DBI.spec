@@ -4,16 +4,17 @@
 #
 Name     : perl-DBI
 Version  : 1.642
-Release  : 35
+Release  : 36
 URL      : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.642.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.642.tar.gz
 Summary  : 'Database independent interface for Perl'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-DBI-bin = %{version}-%{release}
-Requires: perl-DBI-lib = %{version}-%{release}
 Requires: perl-DBI-license = %{version}-%{release}
 Requires: perl-DBI-man = %{version}-%{release}
+Requires: perl-DBI-perl = %{version}-%{release}
+Requires: perl(Apache)
 Requires: perl(Coro::Select)
 Requires: perl(Params::Validate)
 Requires: perl(RPC::PlClient)
@@ -36,22 +37,12 @@ bin components for the perl-DBI package.
 %package dev
 Summary: dev components for the perl-DBI package.
 Group: Development
-Requires: perl-DBI-lib = %{version}-%{release}
 Requires: perl-DBI-bin = %{version}-%{release}
 Provides: perl-DBI-devel = %{version}-%{release}
 Requires: perl-DBI = %{version}-%{release}
 
 %description dev
 dev components for the perl-DBI package.
-
-
-%package lib
-Summary: lib components for the perl-DBI package.
-Group: Libraries
-Requires: perl-DBI-license = %{version}-%{release}
-
-%description lib
-lib components for the perl-DBI package.
 
 
 %package license
@@ -70,8 +61,18 @@ Group: Default
 man components for the perl-DBI package.
 
 
+%package perl
+Summary: perl components for the perl-DBI package.
+Group: Default
+Requires: perl-DBI = %{version}-%{release}
+
+%description perl
+perl components for the perl-DBI package.
+
+
 %prep
 %setup -q -n DBI-1.642
+cd %{_builddir}/DBI-1.642
 
 %build
 export http_proxy=http://127.0.0.1:9/
@@ -96,7 +97,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-DBI
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-DBI/LICENSE
+cp %{_builddir}/DBI-1.642/LICENSE %{buildroot}/usr/share/package-licenses/perl-DBI/63f2a1de14ec3f52b5ad62ffae99e3638db33472
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -109,68 +110,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/Bundle/DBI.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/DBM.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/ExampleP.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/File.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/File/Developers.pod
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/File/HowTo.pod
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/File/Roadmap.pod
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Policy/Base.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Policy/classic.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Policy/pedantic.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Policy/rush.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/Base.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/corostream.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/null.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/pipeone.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/stream.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Mem.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/NullP.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Proxy.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Sponge.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Changes.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Const/GetInfo/ANSI.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Const/GetInfo/ODBC.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Const/GetInfoReturn.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Const/GetInfoType.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD/Metadata.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD/SqlEngine.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD/SqlEngine/Developers.pod
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD/SqlEngine/HowTo.pod
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Execute.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Request.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Response.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Serializer/Base.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Serializer/DataDumper.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Serializer/Storable.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Transport/Base.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Transport/pipeone.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Transport/stream.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Profile.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProfileData.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProfileDumper.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProfileDumper/Apache.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProfileSubs.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProxyServer.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/PurePerl.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/SQL/Nano.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Util/CacheMemory.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Util/_accessor.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/W32ODBC.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/Win32/DBIODBC.pm
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/DBIXS.h
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/Driver.xst
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/Driver_xst.h
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbd_xsh.h
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbi_sql.h
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbipport.h
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbivport.h
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbixs_rev.h
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/dbixs_rev.pl
 
 %files bin
 %defattr(-,root,root,-)
@@ -230,16 +169,78 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/share/man/man3/DBI::W32ODBC.3
 /usr/share/man/man3/Win32::DBIODBC.3
 
-%files lib
-%defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/DBI.so
-
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-DBI/LICENSE
+/usr/share/package-licenses/perl-DBI/63f2a1de14ec3f52b5ad62ffae99e3638db33472
 
 %files man
 %defattr(0644,root,root,0755)
 /usr/share/man/man1/dbilogstrip.1
 /usr/share/man/man1/dbiprof.1
 /usr/share/man/man1/dbiproxy.1
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/Bundle/DBI.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/DBM.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/ExampleP.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/File.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/File/Developers.pod
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/File/HowTo.pod
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/File/Roadmap.pod
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Policy/Base.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Policy/classic.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Policy/pedantic.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Policy/rush.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/Base.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/corostream.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/null.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/pipeone.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Gofer/Transport/stream.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Mem.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/NullP.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Proxy.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBD/Sponge.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Changes.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Const/GetInfo/ANSI.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Const/GetInfo/ODBC.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Const/GetInfoReturn.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Const/GetInfoType.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD/Metadata.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD/SqlEngine.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD/SqlEngine/Developers.pod
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/DBD/SqlEngine/HowTo.pod
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Execute.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Request.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Response.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Serializer/Base.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Serializer/DataDumper.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Serializer/Storable.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Transport/Base.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Transport/pipeone.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Gofer/Transport/stream.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Profile.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProfileData.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProfileDumper.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProfileDumper/Apache.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProfileSubs.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/ProxyServer.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/PurePerl.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/SQL/Nano.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Util/CacheMemory.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/Util/_accessor.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/DBI/W32ODBC.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/Win32/DBIODBC.pm
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/DBI.so
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/DBIXS.h
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/Driver.xst
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/Driver_xst.h
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbd_xsh.h
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbi_sql.h
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbipport.h
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbivport.h
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/auto/DBI/dbixs_rev.h
+/usr/lib/perl5/vendor_perl/5.28.2/x86_64-linux-thread-multi/dbixs_rev.pl
