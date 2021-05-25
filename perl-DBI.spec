@@ -4,7 +4,7 @@
 #
 Name     : perl-DBI
 Version  : 1.643
-Release  : 47
+Release  : 48
 URL      : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.643.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/T/TI/TIMB/DBI-1.643.tar.gz
 Summary  : 'Database independent interface for Perl'
