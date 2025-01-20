@@ -6,14 +6,15 @@
 # autospec commit: f4a13a5
 #
 Name     : perl-DBI
-Version  : 1.646
-Release  : 55
-URL      : https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/DBI-1.646.tar.gz
-Source0  : https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/DBI-1.646.tar.gz
+Version  : 1.647
+Release  : 56
+URL      : https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/DBI-1.647.tgz
+Source0  : https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/DBI-1.647.tgz
 Summary  : 'Database independent interface for Perl'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0-Perl GPL-1.0
 Requires: perl-DBI-bin = %{version}-%{release}
+Requires: perl-DBI-license = %{version}-%{release}
 Requires: perl-DBI-man = %{version}-%{release}
 Requires: perl-DBI-perl = %{version}-%{release}
 Requires: perl(Params::Validate)
@@ -31,6 +32,7 @@ BuildRequires : buildreq-cpan
 %package bin
 Summary: bin components for the perl-DBI package.
 Group: Binaries
+Requires: perl-DBI-license = %{version}-%{release}
 
 %description bin
 bin components for the perl-DBI package.
@@ -45,6 +47,14 @@ Requires: perl-DBI = %{version}-%{release}
 
 %description dev
 dev components for the perl-DBI package.
+
+
+%package license
+Summary: license components for the perl-DBI package.
+Group: Default
+
+%description license
+license components for the perl-DBI package.
 
 
 %package man
@@ -65,10 +75,10 @@ perl components for the perl-DBI package.
 
 
 %prep
-%setup -q -n DBI-1.646
-cd %{_builddir}/DBI-1.646
+%setup -q -n DBI-1.647
+cd %{_builddir}/DBI-1.647
 pushd ..
-cp -a DBI-1.646 buildavx2
+cp -a DBI-1.647 buildavx2
 popd
 
 %build
@@ -93,6 +103,8 @@ make TEST_VERBOSE=1 test || :
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-DBI
+cp %{_builddir}/DBI-%{version}/LICENSE %{buildroot}/usr/share/package-licenses/perl-DBI/6ad0b3007d3e2ec25086e45520ea8281991bc83a || :
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -165,6 +177,10 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/share/man/man3/DBI::Util::CacheMemory.3
 /usr/share/man/man3/DBI::W32ODBC.3
 /usr/share/man/man3/Win32::DBIODBC.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-DBI/6ad0b3007d3e2ec25086e45520ea8281991bc83a
 
 %files man
 %defattr(0644,root,root,0755)
