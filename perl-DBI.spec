@@ -7,7 +7,7 @@
 #
 Name     : perl-DBI
 Version  : 1.647
-Release  : 56
+Release  : 57
 URL      : https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/DBI-1.647.tgz
 Source0  : https://cpan.metacpan.org/authors/id/H/HM/HMBRAND/DBI-1.647.tgz
 Summary  : 'Database independent interface for Perl'
